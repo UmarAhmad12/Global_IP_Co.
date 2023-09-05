@@ -188,11 +188,11 @@
 
 @media (min-width: 746px ) and (max-width: 1024px){
     .loginBox{
-        width: 60%;
+        width: 65%;
     } 
     
     .loginNote{
-        width: 60%;
+        width: 65%;
     }
 }
 
