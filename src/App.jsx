@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify"
 import Userpage from "./components/Userpage"
-import Register from "./components/Register"
 import { Routes, Route } from "react-router-dom"
 import RegisterSec from "./components/RegisterSec"
+import Login from "./components/Login"
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     <>
             <Routes>
               <Route path="/" element = {<Userpage/>} />
-              <Route path="/loggedin" element= {<Register />} />
+              <Route path="/loggedin" element= {<Login />} />
               <Route path="/registration" element= {<RegisterSec />} />
             </Routes>
 

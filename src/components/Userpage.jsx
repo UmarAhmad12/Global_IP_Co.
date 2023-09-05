@@ -11,8 +11,6 @@ function Userpage() {
 
     //  Login successful Navigation
     const navigateToLogin = useNavigate();
-    const navigateToRegisterSec = useNavigate();
-
      // Fetching API on Button Click
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

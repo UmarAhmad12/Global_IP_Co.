@@ -2,7 +2,7 @@ import React from 'react'
 import { GiPowerButton } from "react-icons/gi";
 import { FaRegUser} from "react-icons/fa";
 
-function Register() {
+function Login() {
   return (
     <>
     <div className='NavBar'>
@@ -22,4 +22,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login
