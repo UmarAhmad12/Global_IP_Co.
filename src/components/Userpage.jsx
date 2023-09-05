@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../components/Userpage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 function Userpage() {
@@ -59,7 +60,7 @@ function Userpage() {
             <div className="loginBox">
                 <div className='loginNav'>
                     <button id='loginbtn'>Login</button>
-                    <button id='registerbtn' onClick={() => navigateToRegisterSec('/registration')}>Register</button>
+                    <NavLink to='/registration' id='registerbtn'>Register</NavLink>
                 </div>
                 <div>
                     <img className='loginIcon' src='https://globalipco.com/ip-online/assets/images/icons/lock.svg' alt='login' />
