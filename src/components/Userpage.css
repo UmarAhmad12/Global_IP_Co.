@@ -1,0 +1,199 @@
+.NavBar {
+   width: 100%;
+   border-bottom: 3px solid #cccccc;
+   height: 52px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   display: flex;
+   justify-content: space-between;
+   background: #2c618a;
+    background: -webkit-gradient(left top,left bottom,color-stop(0,#2c618a),color-stop(100%,#1b3d58));
+    background: linear-gradient(180deg,#2c618a 0,#1b3d58);
+}
+
+.Logo img{
+    padding: 10px 10px 0;
+    color: #000;
+    width: 310px;
+}
+
+.side h3{
+    color: white;
+    margin-right: 4rem;
+}
+
+
+.loginBoxDiv {
+    width: 100%;
+    margin-top:70px;
+}
+
+.loginBox {
+    width: 40%;
+    margin-left:auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #545454;
+    color: #fff;
+    background: #2b6088;
+    background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);
+
+}
+
+.loginNav {
+    margin-top: 20px;
+    margin-right: 20px;
+    display: inline;
+    float: right;
+}
+
+.Loginlink {
+    padding: 8px 10px;
+    border-right: 2px solid #54b0df;
+    font-weight: 700;
+    font-size: 19px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.Registerlink{
+    padding: 8px 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.loginIcon {
+    width: 40px;
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.loginForm {
+    padding: 2px 40px;
+}
+
+.login-input {
+    background: transparent;
+    padding: 8px;
+    width: 100%;
+    border: 0px solid;
+    border-bottom: 1px solid #ffffff;
+    color: #fff;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.passwordDiv {
+    position: relative;
+}
+
+.passwordIcon{
+    position: absolute;
+    width: 23px;
+    cursor: pointer;
+    right: 0px;
+    bottom: 20px;
+}
+
+#loginbtn, #registerbtn {
+    background: transparent !important;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#loginbtn {
+    border-right: 2px solid black;
+}
+#submit_button {
+    border-radius: 21px;
+    padding: 11px 40px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 0 #2b6088;
+    color: #2b6088;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+#submit_button:hover {
+    box-shadow: inset 200px 0 0 0 #2b6088;
+    color: white;
+}
+
+.forgot-pass {
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.loginNoteDiv {
+    width: 100%;
+}
+.loginNote {
+    color: #000;
+    background: #ffffff;
+    width: 40%;
+    margin-top: 10px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #113048;
+}
+
+.color-border {
+    background: linear-gradient(to right,#1a3048 0%,#257882 50%,#4182c7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1a3048",endColorstr="#4182c7",GradientType=1);
+    width: 100%;
+    height: 14px;
+}
+
+.login-note {
+    padding: 0 20px;
+}
+
+.Ulnote {
+    padding: 0 20px;
+    margin-left: 12px;
+    margin-top: 4px;
+}
+
+@media (min-width: 300px ) and (max-width: 746px){
+    body{
+        background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
+    }
+    .Logo img{
+        padding: 10px 10px;
+        margin-top: 5px;
+        color: #000;
+        width: 200px;
+    }
+
+    .loginBox {
+        width: 90%;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+
+    .loginNote{
+        width: 90%;
+    }
+}
+
+@media (min-width: 746px ) and (max-width: 1024px){
+    .loginBox{
+        width: 60%;
+    } 
+    
+    .loginNote{
+        width: 60%;
+    }
+}
+
+
