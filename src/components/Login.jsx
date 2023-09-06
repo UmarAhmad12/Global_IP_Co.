@@ -1,11 +1,19 @@
 import React from 'react'
 import { GiPowerButton } from "react-icons/gi";
 import { FaRegUser} from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   // Getting user info from localStorage
   let user = localStorage.getItem('email');
   // console.log(user);
+
+  // Logout Section
+  const navigateToUserPage = useNavigate();
+  function logOut() {
+    localStorage.clear();
+    navigateToUserPage('/')
+  }
   return (
     <>
     <div className='NavBar'>
@@ -16,7 +24,7 @@ function Login() {
                     <button id='User-log'>
                       <FaRegUser size={22}/> {user}
                     </button>
-                    <button id='sign-out-btn'>
+                    <button id='sign-out-btn' title='Logout' onClick={logOut}>
                       <GiPowerButton size={22}/>
                     </button>
             </div>
