@@ -3,6 +3,9 @@ import { GiPowerButton } from "react-icons/gi";
 import { FaRegUser} from "react-icons/fa";
 
 function Login() {
+  // Getting user info from localStorage
+  let user = localStorage.getItem('email');
+  // console.log(user);
   return (
     <>
     <div className='NavBar'>
@@ -11,7 +14,7 @@ function Login() {
             </div>
             <div className='side'>
                     <button id='User-log'>
-                      <FaRegUser size={22}/>umara6274@gmail.com
+                      <FaRegUser size={22}/> {user}
                     </button>
                     <button id='sign-out-btn'>
                       <GiPowerButton size={22}/>

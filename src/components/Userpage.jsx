@@ -45,7 +45,7 @@ function Userpage() {
             password : password
         })
         .then(result=>{
-        console.log(result)
+        console.log(result.data)
         toast.success("Login Successful")
         navigateToLogin('/loggedin')
         localStorage.setItem('email', email)
