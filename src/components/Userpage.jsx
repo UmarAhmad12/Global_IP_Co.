@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 function Userpage() {
 
-    //  Login successful Navigation
+    //  Navigate to login page
     const navigateToLogin = useNavigate();
      // Fetching API on Button Click
     const [email, setEmail] = useState('');
@@ -28,6 +28,15 @@ function Userpage() {
         
     console.log({email, password})
     
+    if (email === '') {
+        alert('Email is required')
+    } else if (!email.includes('@')){
+        alert('Please enter a valid email address')
+    }  else if (password === '') {
+        alert('Password is required')
+    } else if (password.length <= 7) {
+        alert ('Password length must be greater than 8 characters')
+    }  
     // https://api.morkshub.xyz/api/login - Pass: Vossle#123 - Test Api
     // http://assetapi.sublimecreations.in/api/login/login
     
@@ -39,10 +48,12 @@ function Userpage() {
         console.log(result)
         toast.success("Login Successful")
         navigateToLogin('/loggedin')
+        localStorage.setItem('email', email)
+        localStorage.setItem('password', password)
         })
         .catch(error => {
         console.log(error)
-        toast.error('Login Unsuccessful !!');
+        toast.error('Invalid email or password');
         })
 
         

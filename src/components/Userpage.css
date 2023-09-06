@@ -196,6 +196,13 @@
     cursor: pointer;
 }
 
+#verify-pass {
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
 @media (min-width: 300px ) and (max-width: 746px){
     body{
         background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
@@ -221,6 +228,11 @@
     #User-log {
         font-size: 12px;
     }
+
+    #verify-pass{
+        font-size: 9px;
+    }
+    
 }
 
 @media (min-width: 746px ) and (max-width: 1024px){
@@ -230,6 +242,13 @@
     
     .loginNote{
         width: 65%;
+    }    
+}
+
+@media (min-width: 1024px ) and (max-width: 1500px){
+
+    #verify-pass{
+        font-size: 12px;
     }
 }
 
