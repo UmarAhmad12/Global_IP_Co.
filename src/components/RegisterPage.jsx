@@ -16,7 +16,7 @@ function RegisterPage() {
                 <button id='registerbtn'>Register</button>
             </div>
             <div>
-                <img className='loginIcon' src='https://globalipco.com/ip-online/assets/images/icons/lock.svg' alt='login' />
+                <img className='loginIcon' src='https://globalipco.com/ip-online/assets/images/icons/register.svg' alt='login' />
 
                 <form className='loginForm' style={{textAlign:'center'}}>
                     <div>
