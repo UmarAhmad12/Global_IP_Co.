@@ -160,41 +160,7 @@
     margin-top: 4px;
 }
 
-/* Register section CSS */
-
-.side {
-    display: flex;
-}
-
-.side h3{
-    color: white;
-}
-
-#sign-out-btn {
-    background: transparent;
-    color: white;
-    border: none;
-    border-left: 1px solid black;
-    padding-right: 20px;
-    padding-left: 20px;
-}
-
-#sign-out-btn:hover{
-    background-color: #325376;
-    cursor: pointer;
-}
-
-#User-log {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    gap: 10px;
-    background: transparent;
-    border: none;
-    color: white;
-    padding-right: 20px;
-    cursor: pointer;
-}
+/* Register Page */
 
 #verify-pass {
     cursor: pointer;
@@ -203,15 +169,19 @@
     white-space: nowrap;
 }
 
-@media (min-width: 300px ) and (max-width: 746px){
-    body{
+@media (min-width: 300px ) and (max-width: 500px){
+    
+    #body{
         background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
     }
+
+    .loginBoxDiv{
+        background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
+
+    }
+
     .Logo img{
-        padding: 10px 10px;
-        margin-top: 5px;
-        color: #000;
-        width: 200px;
+        display: none;
     }
 
     .loginBox {
@@ -227,6 +197,43 @@
 
     #User-log {
         font-size: 12px;
+        
+    }
+
+    #verify-pass{
+        font-size: 9px;
+    }
+}
+
+@media (min-width: 500px ) and (max-width: 746px){
+    #body{
+        background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
+    }
+
+    .loginBoxDiv{
+        background: linear-gradient(135deg,#2b6088 0%,#12344f 64%,#102d44 100%);;
+
+    }
+
+    .Logo img{
+        width: 200px;
+        margin-top: 8px;
+    }
+
+    .loginBox {
+        width: 90%;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+
+    .loginNote{
+        width: 90%;
+    }
+
+    #User-log {
+        font-size: 12px;
+        
     }
 
     #verify-pass{

@@ -12,7 +12,7 @@ function RegisterPage() {
     <div className='loginBoxDiv'>
         <div className="loginBox">
             <div className='loginNav'>
-                <NavLink to='/' id='loginbtn'>Login</NavLink>
+                <NavLink to='/login' id='loginbtn'>Login</NavLink>
                 <button id='registerbtn'>Register</button>
             </div>
             <div>
