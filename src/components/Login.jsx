@@ -46,7 +46,7 @@ function Login() {
         }).then(result => {
             console.log(result.data)
             toast.success("Login Successful")
-            navigateToHome('/')
+            navigateToHome('/loggedin')
             localStorage.setItem('email', email)
             localStorage.setItem('password', password)
         }).catch(error => {

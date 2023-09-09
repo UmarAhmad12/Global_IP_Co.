@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,12 +15,17 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import PersonIcon from '@mui/icons-material/Person';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Divider from '@mui/material/Divider';
+import { Link, useNavigate } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+// import { Button, ListItemIcon } from '@mui/material';
 
-import { useNavigate } from 'react-router-dom';
-import { ListItemIcon } from '@mui/material';
 
+
+
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 const drawerWidth = 220;
@@ -39,6 +45,9 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: 'hidden',
+  borderRight: '3px solid #cccccc',
+  background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)',
+    transition: 'margin-left .3s'
 });
 
 const closedMixin = (theme) => ({
@@ -51,6 +60,9 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(0)} + 1px)`,
   },
+  borderRight: '3px solid #cccccc',
+    backgroundColor: '#1b3e59',
+    transition: 'margin-left .3s'
 });
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -67,6 +79,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       ...closedMixin(theme),
       '& .MuiDrawer-paper': closedMixin(theme),
     }),
+    borderRight: '3px solid #cccccc',
+    backgroundColor: '#1b3e59',
+    transition: 'margin-left .3s'
   }),
 );
 
@@ -74,13 +89,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function Topbar() {
   
   const [open, setOpen] = React.useState(true);
+  const [navWidth, setNavWidth] = React.useState('220px');
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setNavWidth('220px');
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setNavWidth('0px');
   };
     
    // Getting user info from localStorage
@@ -92,19 +108,29 @@ function Topbar() {
  
    const logOut = () => {
      localStorage.clear();
-     navigateToLoginPage('/login');
+     navigateToLoginPage('/');
    };
+   
+  const menuItems = [
+    {'text':'Home', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'New Cases', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'Draft Cases', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'Pending Cases', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'Completed Cases', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'Other Cases', 'icon': <HomeIcon />, 'link': '/registration'},
+    {'text':'Profile', 'icon': <HomeIcon />, 'link': '/registration'}
+  ];
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar  component="nav" sx={{background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)' }}>
+      <AppBar  component="nav" sx={{background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)', zIndex:9999, borderBottom: '3px solid #cccccc' }}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={open ? handleDrawerClose : handleDrawerOpen}
+            onClick={navWidth === '0px' ? handleDrawerOpen : handleDrawerClose }
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
@@ -127,36 +153,75 @@ function Topbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} sx={{zIndex:-1}}>
-        <List sx={{mt:'50px'}}>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 60,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+      <Drawer variant="permanent" open={open} sx={{ display: {xs:'none', sm:'block'} }}>
+        <List sx={{mt:'75px'}}>
+          <ListItem key='search' disablePadding sx={{ display: 'block' }}>
+            <Paper
+              component="form"
+              sx={{ ml:2, mb:2, alignItems: 'center', width: '70%' }}
+            >
+              
+              <InputBase
+                sx={{ flex: 1, bgcolor:'#ccd8e4',
+                  padding: '2px',
+                  borderRadius: '5px',
+                  mb: '0',
+                  fontSize: '13px',
+                  color: '#102d45',
+                  border: '1px solid #ccd8e4',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  outline: 'none' }}
+                placeholder="Search cases"
+                
+              />
+              <IconButton type="button" sx={{ p: '2px', color:'black', bgcolor:'#ccd8e4','&:hover':{bgcolor:'#ccd8e4'}, ml:1 }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+            <Divider />
+          </ListItem>
+          {menuItems.map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+              <Link to={item.link}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
+                    minHeight: 10,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                        color:'white'
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 , color:'white'}} />
+                </ListItemButton>
+                <Divider />
+              </Link>
             </ListItem>
           ))}
         </List>
       </Drawer>
+      <Box sx={{height: '100%', width: navWidth, position: 'fixed',
+  zIndex: 1,
+  top: 0,
+  left: 0,
+  background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)',
+  borderRight: '3px solid #cccccc',
+  overflowX: 'hidden',
+  transition: '0.5s',
+  paddingTop: '60px', display: {xs:'block', sm:'none'}}}>
+        <Typography variant='h1'>Umar</Typography>
+      </Box>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-
-        
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
@@ -171,19 +236,7 @@ function Topbar() {
           consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
           sapien faucibus et molestie ac.
         </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        
       </Box>     
     </Box>
   );
