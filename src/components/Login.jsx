@@ -80,7 +80,7 @@ function Login() {
                             <div className='passwordDiv'>
                                 <p style={{textAlign:'left'}}>Password</p>
                                 <input type='password' value={password} className='login-input' name='password' id='password' onChange={handlePassword}/>
-                                <img className='passwordIcon' src='https://cdn-icons-png.flaticon.com/512/709/709612.png' alt='Icon' />
+                                {/* <img className='passwordIcon' src='https://cdn-icons-png.flaticon.com/512/709/709612.png' alt='Icon' /> */}
                             </div>
                             <div style={{width:'100%',textAlign:'center'}}>
                                 <button type='submit' id="submit_button" onClick={handleApi}>Log in</button>

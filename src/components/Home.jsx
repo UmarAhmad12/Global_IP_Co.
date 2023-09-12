@@ -17,8 +17,13 @@ import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 import { Link, useNavigate } from 'react-router-dom';
+import Collapse from '@mui/material/Collapse';
+
+// Menu Icons
 import HomeIcon from '@mui/icons-material/Home';
-// import { Button, ListItemIcon } from '@mui/material';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
+import ArticleIcon from '@mui/icons-material/Article';
+import StarBorder from '@mui/icons-material/StarBorder';
 
 
 
@@ -26,6 +31,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 
 const drawerWidth = 220;
@@ -89,10 +95,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function Topbar() {
   
   const [open, setOpen] = React.useState(true);
-  const [navWidth, setNavWidth] = React.useState('220px');
+  const [navWidth, setNavWidth] = React.useState('0px');
+
+  // Collapse Submenu
+  const [subMenu, setSubMenuOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setSubMenuOpen(!subMenu);
+  };
 
   const handleDrawerOpen = () => {
-    setNavWidth('220px');
+    setNavWidth('250px');
   };
 
   const handleDrawerClose = () => {
@@ -110,19 +123,26 @@ function Topbar() {
      localStorage.clear();
      navigateToLoginPage('/');
    };
+
+  //  Menu Items Button
    
   const menuItems = [
-    {'text':'Home', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'New Cases', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'Draft Cases', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'Pending Cases', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'Completed Cases', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'Other Cases', 'icon': <HomeIcon />, 'link': '/registration'},
-    {'text':'Profile', 'icon': <HomeIcon />, 'link': '/registration'}
+    {id: 1, 'text':'Home', 'icon': <HomeIcon />, 'link': '/registration', parent_id: null},
+    {id: 2, 'text':'New Cases', 'icon': <EditNoteOutlinedIcon />, 'link': null, parent_id: null},
+    {id: 3, 'text':'Draft Cases', 'icon': <ArticleIcon />, 'link': '/registration', parent_id: null},
+    {id: 4, 'text':'Pending Cases', 'icon': <ArticleIcon />, 'link': '/registration', parent_id: null},
+    {id: 5, 'text':'Completed Cases', 'icon': <ArticleIcon />, 'link': '/registration', parent_id: null},
+    {id: 6, 'text':'Other Cases', 'icon': <ArticleIcon />, 'link': '/registration', parent_id: null},
+    {id: 7, 'text':'Profile', 'icon': <PersonIcon />, 'link': '/registration', parent_id: null},
+    {id: 8, 'text':'Patna Cases',  'link': '/registration', parent_id: 2},
+    {id: 9, 'text':'Delhi Cases',  'link': '/registration', parent_id: 2},
   ];
 
   return (
     <Box sx={{ display: 'flex' }}>
+
+                       {/* Header */}
+
       <CssBaseline />
       <AppBar  component="nav" sx={{background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)', zIndex:9999, borderBottom: '3px solid #cccccc' }}>
         <Toolbar>
@@ -153,6 +173,8 @@ function Topbar() {
           </Box>
         </Toolbar>
       </AppBar>
+                      {/* Sidebar Menu */}
+
       <Drawer variant="permanent" open={open} sx={{ display: {xs:'none', sm:'block'} }}>
         <List sx={{mt:'75px'}}>
           <ListItem key='search' disablePadding sx={{ display: 'block' }}>
@@ -182,8 +204,117 @@ function Topbar() {
             <Divider />
           </ListItem>
           {menuItems.map((item) => (
+            item.parent_id === null && (
             <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-              <Link to={item.link}>
+              {item.link !== null ?
+                (<Link to={item.link} style={{textDecoration:'none'}}>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 10,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                    }}
+                  >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                          color:'white'
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 , color:'white'}} />
+                  </ListItemButton>
+                  <Divider />
+                </Link>)
+                : (
+                  <>
+                    <ListItemButton
+                    onClick={handleClick}
+                      sx={{
+                        minHeight: 10,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                      }}
+                    >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                            color:'white'
+                          }}
+                        >
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText  primary={item.text} sx={{ opacity: open ? 1 : 0 , color:'white'}} />
+                        {item.link === null && (subMenu ? <ExpandLess sx={{color:'white'}} />  : <ExpandMore  sx={{color:'white'}}/>)}
+                    </ListItemButton>
+                    {menuItems.map((subItem) => (
+                      subItem.parent_id === item.id && (
+                        <Collapse in={subMenu} timeout="auto" unmountOnExit>
+                          <List  component="div" disablePadding>
+                            <ListItemButton sx={{ pl: 1 }}>
+                              <ListItemIcon>
+                                {subItem.icon}
+                              </ListItemIcon>
+                              <ListItemText primary={subItem.text} />
+                            </ListItemButton>
+                          </List>
+                        </Collapse>
+                      )
+                    ))}
+                    <Divider />
+                  </>
+                )
+              }
+            </ListItem>
+            )
+          ))}
+        </List>
+      </Drawer>
+      
+              {/* for Small Screen */}
+
+      <Box sx={{height: '100%', width: navWidth, position: 'fixed',
+  zIndex: 1,
+  top: 0,
+  left: 0,
+  background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)',
+  borderRight: '3px solid #cccccc',
+  overflowX: 'hidden',
+  transition: '0.5s',
+  paddingTop: '65px', 
+  display: {xs:'block', sm:'none'}
+  }}>
+      <List>
+          <ListItem key='search' disablePadding sx={{ display: 'block' }}>
+            <Paper
+              component="form"
+              sx={{ ml:3, mb:2, alignItems: 'center', width: '70%', display:'flex', bgcolor:'#ccd8e4' }}
+            >
+              
+              <InputBase
+                sx={{ 
+                  padding: '2px',
+                  borderRadius: '5px',
+                  fontSize: '13px',
+                  border: '1px solid #ccd8e4',
+                  boxSizing: 'border-box',
+                  outline: 'none' }}
+                placeholder="Search cases"                
+              />
+              <IconButton type="button" sx={{ p: '2px', color:'black', bgcolor:'#ccd8e4','&:hover':{bgcolor:'#ccd8e4'}, ml:1 }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+            <Divider />
+          </ListItem>
+          {menuItems.map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+              <Link to={item.link} style={{textDecoration:'none'}}> 
                 <ListItemButton
                   sx={{
                     minHeight: 10,
@@ -208,18 +339,10 @@ function Topbar() {
             </ListItem>
           ))}
         </List>
-      </Drawer>
-      <Box sx={{height: '100%', width: navWidth, position: 'fixed',
-  zIndex: 1,
-  top: 0,
-  left: 0,
-  background: 'linear-gradient(180deg,#2c618a 0,#1b3d58)',
-  borderRight: '3px solid #cccccc',
-  overflowX: 'hidden',
-  transition: '0.5s',
-  paddingTop: '60px', display: {xs:'block', sm:'none'}}}>
-        <Typography variant='h1'>Umar</Typography>
       </Box>
+      
+                      {/* Body */}
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography paragraph>
